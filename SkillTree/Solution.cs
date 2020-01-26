@@ -38,36 +38,39 @@ public class Solution
         return condition;
     }
 
-    public bool Checker(char[] condition, string skill)
-    {
-        if (condition.Empty == true || skill.Empty == true)
-            return false;
-
-        int conditionIndex = -1;
-        int currentIndex = -1;
-        for(int i = 0; i < skill.Length; i++)
-        {
-            currentIndex = GetCoditionIndex(skill[i]);
-            if( currentIndex > conditionIndex)
-            {
-
-            }
-        }
-
-        return false;
-    }
-
     public int GetCoditionIndex(char[] condition, char c)
     {
-        for(int i = 0; i < condition.Length; i++)
+        for (int i = 0; i < condition.Length; i++)
         {
-            if(condition[i] == c)
+            if (condition[i] == c)
             {
                 return i;
             }
         }
 
         return -1;
+    }
+
+    public bool Checker(char[] condition, string skill)
+    {
+        if (condition.Empty == true || skill.Empty == true)
+            return false;
+
+        int conditionIndex = 0;
+        int currentIndex = -1;
+        for(int i = 0; i < skill.Length; i++)
+        {
+            currentIndex = GetCoditionIndex(skill[i]);
+            if( currentIndex = conditionIndex)
+            {
+                conditionIndex++;
+            }
+        }
+
+        if (conditionIndex > 0)
+            return true;
+
+        return false;
     }
 
     
