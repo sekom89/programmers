@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// Summary description for https://programmers.co.kr/learn/courses/30/lessons/49993
@@ -38,17 +39,23 @@ public class Solution
         return condition;
     }
 
-    public int GetCoditionIndex(char[] condition, char c)
+    public List<char> GetSkillList(char[] condition, string skill)
     {
-        for (int i = 0; i < condition.Length; i++)
+        List<char> tree = new List<char>();
+
+        for (int i = 0; i < skill.Length; i++)
         {
-            if (condition[i] == c)
+            for(int k = 0; k < condition.Length; k++)
             {
-                return i;
+                if(condition[k] == skill[i])
+                {
+                    tree.Add(skill[i]);
+                    break;
+                }
             }
         }
 
-        return -1;
+        return tree;
     }
 
     public bool Checker(char[] condition, string skill)
@@ -56,19 +63,17 @@ public class Solution
         if (condition.Empty == true || skill.Empty == true)
             return false;
 
-        int conditionIndex = 0;
-        int currentIndex = -1;
-        for(int i = 0; i < skill.Length; i++)
-        {
-            currentIndex = GetCoditionIndex(skill[i]);
-            if( currentIndex = conditionIndex)
-            {
-                conditionIndex++;
-            }
-        }
 
-        if (conditionIndex > 0)
+        List<char> skillList = GetSkillList(condition, skill);
+        
+        //아예 없다.
+        if (skillList.Count == 0)
             return true;
+
+        for(int i = 0; skillList.Count; i++)
+        {
+            skillList[i];
+        }
 
         return false;
     }
