@@ -9,7 +9,6 @@ public class Solution
     public int solution(string skill, string[] skill_trees)
     {
         int answer = 0;
-        int skill_trees_max = 20;
 
         char[] condition = SkillToCondition(skill);
 
@@ -39,7 +38,40 @@ public class Solution
         return condition;
     }
 
-    public List<char> GetSkillList(char[] condition, string skill)
+    public bool Checker(char[] condition, string skill)
+    {
+        if (condition.Empty == true || skill.Empty == true)
+            return false;
+
+
+        List<char> skillList = GetRefineList(condition, skill);
+
+        //아예 없다.
+        if (skillList.Count == 0)
+            return true;
+
+        //reverse
+        for (int i = skillList.Count - 1; i = 0; i--)
+        {
+            char _condition = GetCondition(skillList[i]);
+
+            //first
+            if (_condition == null)
+                continue;
+
+            if (i == 0)
+                break;
+
+            if(_condition != skillList[i - 1])
+            {
+                return false;   
+            }
+        }
+
+        return true;
+    }
+
+    public List<char> GetRefineList(char[] condition, string skill)
     {
         List<char> tree = new List<char>();
 
@@ -58,25 +90,21 @@ public class Solution
         return tree;
     }
 
-    public bool Checker(char[] condition, string skill)
+    public char GetCondition(char[] condition, char skill)
     {
-        if (condition.Empty == true || skill.Empty == true)
-            return false;
-
-
-        List<char> skillList = GetSkillList(condition, skill);
-        
-        //아예 없다.
-        if (skillList.Count == 0)
-            return true;
-
-        for(int i = 0; skillList.Count; i++)
+        for (int k = 0; k < condition.Length; k++)
         {
-            skillList[i];
+            if (condition[k] == skill)
+            {
+                if(k == 0)
+                {
+                    return null;
+                }
+
+                return condition[k - 1];
+            }
         }
 
-        return false;
+        return null;
     }
-
-    
 }
